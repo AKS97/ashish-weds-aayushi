@@ -4,6 +4,34 @@ window.WEDDING_CONFIG = {
     groom: { en: "Ashish", hi: "आशीष", honorific: "Er." },
     bride: { en: "Aayushi", hi: "आयुषी", honorific: "Dr." }
   },
+  // User-approved Hindi wording; the original English details stay below.
+  translations: {
+    hi: {
+      "weds": "संग",
+      "Er.": "इंजी",
+      "Dr.": "डॉ.",
+      "Luckhnow": "लखनऊ",
+      "S/o SMT Beena & SH Lokendra Pal Singh": "श्रीमती बीना एवं श्री लोकेंद्र पाल सिंह के सुपुत्र",
+      "D/o SMT Neeta & SH Anuj Singh": "श्रीमती नीता एवं श्री अनुज सिंह की सुपुत्री",
+      "With the blessings of our families, a beautiful forever begins...": "हमारे परिवारों के आशीर्वाद से, शुरू हो रहा है जीवनभर का एक खूबसूरत साथ...",
+      "Together with our families, we warmly invite you to celebrate the beginning of our forever": "हम अपने परिवारों सहित, जीवनभर के इस खूबसूरत साथ की शुरुआत का उत्सव मनाने के लिए आपको सप्रेम आमंत्रित करते हैं",
+      "Golden Blossom Imperial Resorts": "गोल्डन ब्लॉसम इम्पीरियल रिसॉर्ट्स",
+      "Monday": "सोमवार",
+      "Monday, 08/02/2027": "सोमवार, 08/02/2027",
+      "Tuesday": "मंगलवार",
+      "Tuesday, 09/02/2027": "मंगलवार, 09/02/2027",
+      "HALDI HUNGAMA": "हल्दी हंगामा",
+      "Hues of Sunshine": "धूप के सुनहरे रंग",
+      "Liquid (Poolside Banquet)": "लिक्विड (पूलसाइड बैंक्वेट)",
+      "THE GREEN GALA": "द ग्रीन गाला",
+      "Mehendi Mosaic": "मेहंदी मोज़ेक",
+      "GLITTER AND GROVES": "ग्लिटर एंड ग्रोव्स",
+      "Sitaron ki Mehefil": "सितारों की महफ़िल",
+      "Golden Colosseum 4": "गोल्डन कोलोसियम 4",
+      "SHAGANA DI SHAAM": "शगना दी शाम",
+      "Golden Oak (Front Lawn)": "गोल्डन ओक (फ्रंट लॉन)"
+    }
+  },
   city: "Luckhnow",
   timezone: "Asia/Kolkata",
   weddingDate: "09/02/2027",
@@ -66,7 +94,7 @@ window.WEDDING_CONFIG = {
     {
       id: "shagana-di-shaam",
       title: "SHAGANA DI SHAAM",
-      date: "09/02/2027",
+      date: "Tuesday, 09/02/2027",
       time: "7:00 PM",
       startsAt: "2027-02-09T19:00:00+05:30",
       venue: "Golden Oak (Front Lawn)",

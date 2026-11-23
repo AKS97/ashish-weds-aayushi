@@ -22,7 +22,6 @@ window.WEDDING_I18N = {
     "invitationTitle": "Two hearts. One beautiful beginning.",
     "invitationIntro": "Some moments are made more beautiful by the people who share them.",
     "familyPending": "Family invitation wording to follow.",
-    "rsvpPending": "R.S.V.P. details to follow.",
     "countdownEyebrow": "EVERY MOMENT, A LITTLE CLOSER",
     "countdownTitle": "Until our forever begins",
     "countdownSubtitle": "Counting down to the Shubh Muhurat Pheras",
@@ -52,7 +51,6 @@ window.WEDDING_I18N = {
     "share": "Share invitation",
     "copyLink": "Copy link",
     "savePdf": "Save as PDF",
-    "rsvp": "R.S.V.P.",
     "backToTop": "Back to top",
     "musicUnavailable": "Music unavailable",
     "musicPlay": "Play music",
@@ -131,7 +129,6 @@ window.WEDDING_I18N = {
     "invitationTitle": "दो हृदय। एक सुंदर शुरुआत।",
     "invitationIntro": "कुछ पल अपनों के साथ और भी सुंदर बन जाते हैं।",
     "familyPending": "परिवार का मूल आमंत्रण संदेश शीघ्र जोड़ा जाएगा।",
-    "rsvpPending": "संपर्क विवरण शीघ्र जोड़े जाएँगे।",
     "countdownEyebrow": "हर पल, शुभ घड़ी के और करीब",
     "countdownTitle": "शुभ मिलन की प्रतीक्षा",
     "countdownSubtitle": "शुभ मुहूर्त फेरों की ओर",
@@ -161,7 +158,6 @@ window.WEDDING_I18N = {
     "share": "आमंत्रण साझा करें",
     "copyLink": "लिंक कॉपी करें",
     "savePdf": "PDF के रूप में सहेजें",
-    "rsvp": "संपर्क",
     "backToTop": "ऊपर जाएँ",
     "musicUnavailable": "संगीत उपलब्ध नहीं है",
     "musicPlay": "संगीत चलाएँ",
@@ -246,7 +242,7 @@ Object.assign(window.WEDDING_I18N.hi,{
   "venueHeading": "हमारी शुरुआत का आँगन",
   "calendarAll": "सभी उत्सव कैलेंडर में जोड़ें",
   "openMap": "विवाह स्थल का नक्शा खोलें",
-  "mapNote": "Golden Blossom Imperial Resorts · Luckhnow",
+  "mapNote": "गोल्डन ब्लॉसम इम्पीरियल रिसॉर्ट्स · लखनऊ",
   "wishLantern": "शुभकामना का दीप छोड़ें"
 });
 

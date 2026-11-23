@@ -18,12 +18,12 @@
   const audio = $("#wedding-audio");
   const video = $("#invitation-film");
   const t = (key) => dictionaries[lang][key] || dictionaries.en[key] || key;
-  const localized = (value) => typeof value === "string" ? value : value?.[lang] || value?.en || "";
+  const localized = (value) => typeof value === "string" ? config.translations?.[lang]?.[value] || value : value?.[lang] || value?.en || "";
   const couple = (withTitles = false) => {
     const names = [config.couple.groom, config.couple.bride];
-    return (brideSide ? names.reverse() : names).map(person => withTitles && person.honorific ? `${person.honorific} ${localized(person)}` : localized(person));
+    return (brideSide ? names.reverse() : names).map(person => withTitles && person.honorific ? `${localized(person.honorific)} ${localized(person)}` : localized(person));
   };
-  const coupleText = () => couple().join(" weds ");
+  const coupleText = () => couple().join(` ${localized("weds")} `);
   const el = (tag, className, content) => {
     const node = document.createElement(tag);
     if (className) node.className = className;
@@ -54,12 +54,12 @@
     $$("[data-couple-names]").forEach((node) => {
       if (node.id === "hero-names") return;
       const isGate = node.id === "gate-names";
-      node.setAttribute("aria-label", couple(isGate).join(" weds "));
+      node.setAttribute("aria-label", couple(isGate).join(` ${localized("weds")} `));
       node.replaceChildren();
       couple(isGate).forEach((name, position) => {
         if (position) {
-          if (isGate) node.append(document.createTextNode(" "), el("span", "gate-weds", "weds"), document.createTextNode(" "));
-          else node.append(document.createTextNode(" weds "));
+          if (isGate) node.append(document.createTextNode(" "), el("span", "gate-weds", localized("weds")), document.createTextNode(" "));
+          else node.append(document.createTextNode(` ${localized("weds")} `));
         }
         node.append(el("span", "couple-name", name));
       });
@@ -67,7 +67,7 @@
     const hero = $("#hero-names");
     if (!hero) return;
     hero.replaceChildren();
-    hero.setAttribute("aria-label", couple(true).join(" weds "));
+    hero.setAttribute("aria-label", couple(true).join(` ${localized("weds")} `));
     const names = couple(true);
     let index = 0;
     names.forEach((name, position) => {
@@ -82,7 +82,7 @@
       });
       hero.append(word);
       if (!position) {
-        const ampersand = el("span", "name-ampersand", "weds");
+        const ampersand = el("span", "name-ampersand", localized("weds"));
         ampersand.setAttribute("aria-hidden", "true");
         hero.append(ampersand);
       }
@@ -124,27 +124,6 @@
     };
     fillLines("#family-blessing", family.blessing, "blessingPending");
     fillLines("#formal-family-wording", family.invitation, "familyPending");
-    const rsvp = $("#rsvp-contacts");
-    if (!rsvp) return;
-    rsvp.replaceChildren();
-    if (!family.rsvp?.length) {
-      rsvp.append(el("p", "pending-copy", t("rsvpPending")));
-      return;
-    }
-    family.rsvp.forEach((contact) => {
-      if (typeof contact === "string" || contact.en || contact.hi) {
-        rsvp.append(el("p", "rsvp-contact", localized(contact)));
-      } else {
-        const row = el("p", "rsvp-contact");
-        if (contact.name) row.append(el("span", "rsvp-name", localized(contact.name)));
-        if (contact.phone) {
-          const link = el("a", "rsvp-phone", contact.phone);
-          link.href = `tel:${contact.phone.replace(/[^+\d]/g, "")}`;
-          row.append(link);
-        }
-        rsvp.append(row);
-      }
-    });
   }
 
   const compactUtc = (date) => new Date(date).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
@@ -153,7 +132,7 @@
     return {
       title: `${coupleText()} · ${localized(event.title)}`,
       description: [localized(event.subtitle), localized(event.note)].filter(Boolean).join("\n"),
-      location: event.venue === config.venue ? event.venue : `${event.venue}, ${config.venue}`,
+      location: event.venue === config.venue ? localized(event.venue) : `${localized(event.venue)}, ${localized(config.venue)}`,
       start: compactUtc(event.startsAt)
     };
   }
@@ -188,7 +167,7 @@
       number.setAttribute("aria-hidden", "true");
       const body = el("div", "event-content");
       const meta = el("div", "event-meta");
-      const date = el("time", "event-date", event.date);
+      const date = el("time", "event-date", localized(event.date));
       date.dateTime = event.startsAt.slice(0, 10);
       meta.append(date, el("span", "event-time", event.time));
       body.append(meta);
@@ -196,7 +175,7 @@
       copy.append(el("h3", "event-title", localized(event.title)));
       if (localized(event.subtitle)) copy.append(el("p", "event-subtitle", localized(event.subtitle)));
       if (event.muhurat) copy.append(el("p", "event-muhurat", t("muhuratNote")));
-      copy.append(el("p", "event-venue", event.venue));
+      copy.append(el("p", "event-venue", localized(event.venue)));
       if (event.dressCode) copy.append(el("p", "event-dress", `${t("dressCode")}: ${localized(event.dressCode)}`));
       if (localized(event.note)) copy.append(el("p", "event-note", localized(event.note)));
       body.append(copy);
@@ -353,18 +332,20 @@
     const lastDateFull = new Intl.DateTimeFormat(locale, dateFormat).format(lastDate);
     const range = `${firstDay} — ${lastDateFull}`;
     const values = {
-      city: config.city,
-      venue: config.venue,
-      gateDate: `${displayDate} · ${config.city}`,
+      city: localized(config.city),
+      venue: localized(config.venue),
+      gateDate: `${displayDate} · ${localized(config.city)}`,
       weddingDate: displayDate,
       formalDate: `${date} · ${weddingTime}`,
       heroBottomRight: lang === "en" ? range.toUpperCase() : range,
       followedBy: localized(config.weddingNote),
+      mapNote: `${localized(config.venue)} · ${localized(config.city)}`,
       countdownNote: `${t("shubhMuhurat")} · ${date} · ${weddingTime} IST`
     };
     Object.entries(values).forEach(([key, value]) => $$("[data-i18n]").filter((node) => node.dataset.i18n === key).forEach((node) => { node.textContent = value; }));
-    $$("[data-city]").forEach((node) => { node.textContent = config.city; });
-    $$("[data-venue]").forEach((node) => { node.textContent = config.venue; });
+    $$("[data-city]").forEach((node) => { node.textContent = localized(config.city); });
+    $$("[data-venue]").forEach((node) => { node.textContent = localized(config.venue); });
+    $(".venue-photo")?.setAttribute("alt", localized(config.venue));
     $$("[data-wedding-date]").forEach((node) => { node.textContent = config.weddingDate; });
   }
   function renderLanguage() {
@@ -404,7 +385,7 @@
     }));
     $("#share-button")?.addEventListener("click", async () => {
       if (!invitationUrl()) { announce(t("shareAfterHosting")); return; }
-      const data = { title: document.title, text: `${coupleText()} · Shubh Vivah · ${config.weddingDate} · ${config.city}`, url: invitationUrl() };
+      const data = { title: document.title, text: `${coupleText()} · Shubh Vivah · ${config.weddingDate} · ${localized(config.city)}`, url: invitationUrl() };
       if (navigator.share) {
         try { await navigator.share(data); return; }
         catch (error) { if (error.name === "AbortError") return; }
